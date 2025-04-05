@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Meus Filmes Favoritos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .filmes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .filme {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filme:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .filme img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .filme-content {
+            padding: 1rem;
+        }
+
+        .filme h2 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filme p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .filme-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .filmes-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎬 Meus Filmes Favoritos</h1>
+    <div class="filmes-container" id="filmes-container"></div>
+
+    <footer class="copyright">
+        © 2025 - Desenvolvido por Tayná Goes de Sousa
+    </footer>
+
+    <script>
+        const filmes = [
+            {
+                title: "O Senhor dos Anéis: A Sociedade do Anel",
+                image: "https://br.web.img3.acsta.net/medias/nmedia/18/92/91/32/20224832.jpg",
+                description: "Um grupo de heróis se une para destruir um anel maligno que ameaça a Terra-média.",
+                alt: "O Senhor dos Anéis: A Sociedade do Anel",
+                ano: 2001,
+                diretor: "Peter Jackson",
+                duracao: "2h 58min",
+                genero: "Aventura/Fantasia"
+            },
+            {
+                title: "Matrix",
+                image: "https://upload.wikimedia.org/wikipedia/pt/c/c1/The_Matrix_Poster.jpg",
+                description: "Um hacker descobre que a realidade que conhecemos é uma simulação criada por máquinas.",
+                alt: "Matrix",
+                ano: 1999,
+                diretor: "Lana Wachowski",
+                duracao: "2h 16min",
+                genero: "Ficção Científica/Ação"
+            },
+            {
+                title: "Inception",
+                image: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg",
+                description: "Um ladrão especializado em roubar informações através dos sonhos recebe uma tarefa impossível.",
+                alt: "Inception",
+                ano: 2010,
+                diretor: "Christopher Nolan",
+                duracao: "2h 28min",
+                genero: "Ficção Científica/Ação"
+            },
+            {
+                title: "O Rei Leão",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUVYjU65wbNrQ482SodwuaItrJj707bjF8KA&s",
+                description: "A jornada de um jovem leão em busca de seu lugar no mundo e seu destino como rei.",
+                alt: "O Rei Leão",
+                ano: 1994,
+                diretor: "Roger Allers",
+                duracao: "1h 28min",
+                genero: "Animação/Aventura"
+            }
+        ];
+
+        function renderizarFilmes() {
+            const container = document.getElementById('filmes-container');
+
+            const elementosFilmes = filmes.map(filme => {
+                const filmeDiv = document.createElement('div');
+                filmeDiv.className = 'filme';
+                filmeDiv.innerHTML = `
+                    <img src="${filme.image}" alt="${filme.alt}">
+                    <div class="filme-content">
+                        <h2>${filme.title}</h2>
+                        <p>${filme.description}</p>
+                        <div class="filme-info">
+                            <span>${filme.ano}</span>
+                            <span>${filme.duracao}</span>
+                            <span>${filme.genero}</span>
+                        </div>
+                    </div>
+                `;
+                return filmeDiv;
+            });
+
+            elementosFilmes.forEach(elemento => {
+                container.appendChild(elemento);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', renderizarFilmes);
+    </script>
+</body>
+
+</html>
